@@ -1,8 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\TableController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ReservationController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +25,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+// Route::get('/', [AuthenticatedSessionController::class, 'create'])
+//                 ->name('login');
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -31,12 +41,17 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('layouts.admin');
 })->middleware(['auth'])->name('dashboard');
 
 
 Route::middleware(['auth' , 'admin'])->name('admin.')->prefix('admin')->group(function(){
     Route::get('/' , [AdminController::class , 'index'])->name('index');
+    Route::resource('/restaurant' , CategoryController::class);
+    Route::resource('/menu' , MenuController::class);
+    Route::resource('/reservation' , ReservationController::class);
+    Route::resource('/table' , TableController::class);
+    Route::resource('/user' , UserController::class);
 });
 
 

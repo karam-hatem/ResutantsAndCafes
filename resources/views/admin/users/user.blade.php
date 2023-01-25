@@ -64,10 +64,10 @@
         .bg-secondary {
             background-color: rgb(0, 0, 69) !important;
         }
-        .restaurant, .reservation, .admin, .user {
+        .dashboard, .restaurant, .admin, .reservation {
             background-color: none;
         }
-        .dashboard {
+        .user{
             background-color: silver;
         }
     </style>
@@ -84,7 +84,7 @@
     <div class="content">
 
 
-        <h1>dashborad</h1>
+        <h1>user</h1>
 
         {{-- <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
