@@ -69,7 +69,7 @@
         .dashboard, .reservation, .admin, .user {
             background-color: none;
         }
-        .restaurant{
+        .category{
             background-color: silver;
         }
     </style>
@@ -86,35 +86,35 @@
     <div class="content">
 
 
-        <h1>Restaurants</h1>
+        <h1>categories</h1>
             <div class="col-sm-12 col-xl-6">
                 <div class="bg-secondary rounded h-100 p-4" style="background-color: #fff !important; ">
-                    <h5 class="mb-4">Add New Admin</h5>
-                    <form action="{{ route('admin.restaurant.store') }}" method="post" enctype="multipart/form-data" files=true>
+                    <h5 class="mb-4">Add New Restaurant</h5>
+                    <form action="{{ route('admin.category.store') }}" method="post" enctype="multipart/form-data" files=true>
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">Restaurant Name</label>
+                            <label class="form-label">category Name</label>
                             <input type="text" name="name" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Restaurant Description</label>
+                            <label class="form-label">category Description</label>
                             <input type="text" name="description" class="form-control">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Restaurant Image</label>
+                            <label class="form-label">category Image</label>
                             <input type="file" name="image" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Number of Table</label>
                             <input type="number" name="tables_number" class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary">Add Restaurant</button>
-                        <a href="{{route('admin.restaurant.index')}}" class="option-btn" style="border: none; color:#000040 !important"><button style="background-color: yellow !important; color:#000040 !important" class="btn btn-primary">Back To Dashboard</button></a>
+                        <button type="submit" class="btn btn-primary">Add category</button>
+                        <a href="{{route('admin.category.index')}}" class="option-btn" style="border: none; color:#000040 !important"><button style="background-color: yellow !important; color:#000040 !important" class="btn btn-primary">Back To Dashboard</button></a>
                     </form>
                 </div>
             </div>
 
-            {{-- <form action="{{ route('admin.restaurant.store') }}" method="post" enctype="multipart/form-data">
+            {{-- <form action="{{ route('admin.category.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="file" name="img">
                 <button type="submit">click</button>

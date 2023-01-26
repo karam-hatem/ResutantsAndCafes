@@ -1,1 +1,1 @@
-.dashboard .restaurant .reservation .admin .user
+.dashboard .category .reservation .admin .user

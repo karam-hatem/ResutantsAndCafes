@@ -16,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
-        return view('admin.categories.index' , compact('category'));
+        $categories = Category::get();
+        return view('admin.categories.index' , ['categories'=>$categories]);
     }
 
     /**
@@ -27,6 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+
         return view("admin.categories.create");
     }
 
@@ -63,7 +64,7 @@ class CategoryController extends Controller
         //     'tables_number'=>$request->input('tables_number'),
         // ]);
 
-        return redirect('/admin/restaurant');
+        return redirect('/admin/category');
 
 
         // $image = response()->json([
@@ -94,9 +95,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($category)
     {
-        //
+        $cat = Category::find($category);
+        return view('admin.categories.edit' , ['cat'=>$cat]);
     }
 
     /**
@@ -106,9 +108,20 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $category)
     {
-        //
+        $image = $request->file('image')->getClientOriginalName();
+        $request->file('image')->storeAs('public/image', $image);
+
+        // dd($category);
+        Category::where('id' , $category)->update([
+            'image' => $image,
+            'name' => $request->input('name'),
+            'description' => $request->input('description'),
+            'tables_number' => $request->input('tables_number'),
+            ]);
+
+        return redirect('admin/category');
     }
 
     /**
@@ -117,8 +130,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($category)
     {
-        //
+        Category::destroy($category);
+        return redirect('admin/category');
     }
 }

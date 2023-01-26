@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $user = User::get();
         return view('admin.users.index' , compact('user'));
     }
 
@@ -57,7 +57,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($user)
     {
         //
     }
@@ -69,9 +69,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($user)
     {
-        //
+        $cat = User::find($user);
+        if($cat->is_admin == 1){
+            User::where('id' , $user)->update([
+                    'is_admin'=>false,
+                ]);
+
+            return redirect('admin/user');
+        } else {
+            User::where('id' , $user)->update([
+                'is_admin'=>true,
+            ]);
+
+        return redirect('admin/user');
+        }
     }
 
     /**
@@ -80,8 +93,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($user)
     {
-        //
+        // return 'this is destroy';
+        user::destroy($user);
+        return redirect('admin/user');
     }
 }

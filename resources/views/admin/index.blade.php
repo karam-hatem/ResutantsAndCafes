@@ -64,7 +64,7 @@
         .bg-secondary {
             background-color: rgb(0, 0, 69) !important;
         }
-        .restaurant, .reservation, .admin, .user {
+        .category, .reservation, .admin, .user {
             background-color: none;
         }
         .dashboard {

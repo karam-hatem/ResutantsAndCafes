@@ -67,7 +67,7 @@
         .dashboard, .reservation, .admin, .user {
             background-color: none;
         }
-        .restaurant{
+        .category{
             background-color: silver;
         }
     </style>
@@ -84,9 +84,9 @@
     <div class="content">
 
 
-        <h1>Restaurants</h1>
+        <h1>categories</h1>
 
-        <a href="{{route('admin.restaurant.create')}}"><button>Add Restaurant</button></a>
+        <a href="{{route('admin.category.create')}}"><button>Add category</button></a>
 
         <div class="container-fluid pt-4 px-4" style="margin-bottom: 30px;">
             <div class="row g-4">
@@ -99,30 +99,26 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">First Name</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Tables Number</th>
+                                        <th scope="col">Edit</th>
                                         <th scope="col">Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First Name</th>
-                                        <th scope="col">Delete</th>
-                                    </tr>
+                                    <?php $i = 1; ?>
+                                    @foreach ($categories as $item)
+                                        <tr>
+                                            <th scope="col">{{$i++}}</th>
+                                            <th scope="col">{{$item->name}}</th>
+                                            <th scope="col">{{$item->description}}</th>
+                                            <th scope="col"><img width="100px" height="100px" src="{{URL::asset("storage/image/".$item->image)}}"></th>
+                                            <th scope="col">{{$item->tables_number}}</th>
+                                            <th scope="col"><a href="{{route('admin.category.edit' , ['category'=>$item->id])}}">Edit</a></th>
+                                            <th scope="col"><a href="{{route('admin.category.destroy' , ['category'=>$item->id])}}">Delete</a></th>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
