@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\TableController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Search;
+use App\Http\Controllers\Contact;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +26,15 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', function () {
     return view('layouts.landingPage');
+});
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/reservation', function () {
+    return view('reservation');
 });
 
 Route::get('/login', function () {
@@ -70,7 +82,7 @@ Route::middleware(['auth' , 'admin'])->name('admin.')->prefix('admin')->group(fu
     Route::get('/user/{user}' , [UserController::class , 'update'])->name('user-update');
 });
 
-
+Route::post('/search' , [Search::class , 'search'])->name('search');
 
 
 
